@@ -15,6 +15,7 @@ import androidx.compose.runtime.currentComposer
 import androidx.core.graphics.minus
 import com.mapbox.mapboxsdk.geometry.LatLng
 
+@Deprecated("Will be removed in a future release", ReplaceWith("ProjectionPixelObserver"))
 @MapLibreComposable
 @Composable
 fun screenDistanceBetween(a: LatLng, b: LatLng): Float {

@@ -32,6 +32,8 @@ import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.layers.Layer
 import com.mapbox.mapboxsdk.style.sources.Source
 import com.mapbox.mapboxsdk.utils.BitmapUtils
+import com.maplibre.compose.callbacks.MapGestureContext
+import com.maplibre.compose.callbacks.setupEventCallbacks
 import com.maplibre.compose.camera.MapViewCamera
 import com.maplibre.compose.rememberSaveableMapControls
 import com.maplibre.compose.runtime.nodes.MapCameraNode
@@ -73,22 +75,22 @@ annotation class MapLibreComposable
  */
 @Composable
 internal fun MapLibre(
-    modifier: Modifier,
-    styleUrl: String,
-    camera: MutableState<MapViewCamera>,
-    mapControls: State<MapControls> = rememberSaveableMapControls(),
-    properties: MapProperties = MapProperties(),
-    locationEngine: LocationEngine? = null,
-    locationRequestProperties: LocationRequestProperties? = null,
-    locationStyling: LocationStyling = LocationStyling(),
-    userLocation: MutableState<Location>? = null,
-    sources: List<Source>? = null,
-    layers: List<Layer>? = null,
-    images: List<Pair<String, Int>>? = null,
-    onMapReadyCallback: ((Style) -> Unit)? = null,
-    onTapGestureCallback: ((MapGestureContext) -> Unit)? = null,
-    onLongPressGestureCallback: ((MapGestureContext) -> Unit)? = null,
-    content: (@Composable @MapLibreComposable () -> Unit)? = null,
+  modifier: Modifier,
+  styleUrl: String,
+  camera: MutableState<MapViewCamera>,
+  mapControls: State<MapControls> = rememberSaveableMapControls(),
+  properties: MapProperties = MapProperties(),
+  locationEngine: LocationEngine? = null,
+  locationRequestProperties: LocationRequestProperties? = null,
+  locationStyling: LocationStyling = LocationStyling(),
+  userLocation: MutableState<Location>? = null,
+  sources: List<Source>? = null,
+  layers: List<Layer>? = null,
+  images: List<Pair<String, Int>>? = null,
+  onMapReadyCallback: ((Style) -> Unit)? = null,
+  onTapGestureCallback: ((MapGestureContext) -> Unit)? = null,
+  onLongPressGestureCallback: ((MapGestureContext) -> Unit)? = null,
+  content: (@Composable @MapLibreComposable () -> Unit)? = null,
 ) {
   if (LocalInspectionMode.current) {
     Box(modifier = modifier)

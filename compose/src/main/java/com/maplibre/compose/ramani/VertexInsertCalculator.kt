@@ -17,6 +17,7 @@ import androidx.core.graphics.minus
 import androidx.core.graphics.plus
 import com.mapbox.mapboxsdk.geometry.LatLng
 
+@Deprecated("Will be removed in a future release", ReplaceWith("ProjectionPixelObserver"))
 @MapLibreComposable
 @Composable
 fun VertexInsertCalculator(vertices: List<LatLng>, onPointsChanged: (List<LatLng>) -> Unit) {

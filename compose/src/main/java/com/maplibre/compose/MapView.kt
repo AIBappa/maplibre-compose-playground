@@ -12,7 +12,7 @@ import com.mapbox.mapboxsdk.maps.Style
 import com.maplibre.compose.camera.MapViewCamera
 import com.maplibre.compose.ramani.LocationRequestProperties
 import com.maplibre.compose.ramani.LocationStyling
-import com.maplibre.compose.ramani.MapGestureContext
+import com.maplibre.compose.callbacks.MapGestureContext
 import com.maplibre.compose.ramani.MapLibre
 import com.maplibre.compose.ramani.MapLibreComposable
 import com.maplibre.compose.settings.MapControls
@@ -27,6 +27,7 @@ fun MapView(
     locationRequestProperties: LocationRequestProperties = LocationRequestProperties.Default,
     locationStyling: LocationStyling = LocationStyling.Default,
     userLocation: MutableState<Location>? = null,
+    screenCallback:
     onMapReadyCallback: ((Style) -> Unit)? = null,
     onTapGestureCallback: ((MapGestureContext) -> Unit)? = null,
     onLongPressGestureCallback: ((MapGestureContext) -> Unit)? = null,
