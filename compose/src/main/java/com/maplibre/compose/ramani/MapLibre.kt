@@ -33,6 +33,7 @@ import com.mapbox.mapboxsdk.style.layers.Layer
 import com.mapbox.mapboxsdk.style.sources.Source
 import com.mapbox.mapboxsdk.utils.BitmapUtils
 import com.maplibre.compose.callbacks.MapGestureContext
+import com.maplibre.compose.callbacks.ProjectionCallbackManager
 import com.maplibre.compose.callbacks.setupEventCallbacks
 import com.maplibre.compose.camera.MapViewCamera
 import com.maplibre.compose.rememberSaveableMapControls
@@ -90,6 +91,7 @@ internal fun MapLibre(
   onMapReadyCallback: ((Style) -> Unit)? = null,
   onTapGestureCallback: ((MapGestureContext) -> Unit)? = null,
   onLongPressGestureCallback: ((MapGestureContext) -> Unit)? = null,
+  projectionCallbackManager: ProjectionCallbackManager? = null,
   content: (@Composable @MapLibreComposable () -> Unit)? = null,
 ) {
   if (LocalInspectionMode.current) {
@@ -131,6 +133,13 @@ internal fun MapLibre(
       maplibreMap.addImages(context, currentImages)
       maplibreMap.addSources(currentSources)
       maplibreMap.addLayers(currentLayers)
+
+      // Any time the viewport changes, run the projection callback manager's camera changed.
+      projectionCallbackManager?.let {
+        maplibreMap.addOnCameraMoveListener {
+          it.onMapViewCameraChanged(maplibreMap)
+        }
+      }
 
       // Notify the parent callback that the map is ready with a style.
       // This must include all style modifications from adding images, sources, and layers.

@@ -22,9 +22,10 @@ data class MapGestureContext(
   /** The coordinate of the gesture. */
   val coordinate: LatLng,
 
-  val features: List<Feature> = emptyList(),
+  /** The features at the gesture location. */
+  val features: List<Feature>,
 
-    // TODO: Bundle other relevant gesture context information here.
+  // TODO: Bundle other relevant gesture context information here.
 )
 
 /**
@@ -42,15 +43,9 @@ internal fun MapboxMap.setupEventCallbacks(
       val screenLocation = projection.toScreenLocation(point)
       val features = queryRenderedFeatures(screenLocation)
 
-      if (features.isNotEmpty()) {
-        Log.d(
-            "MapLibre",
-            "MapView detected features at location. Consider using feature tap gesture instead if using have runtime features.")
-      }
-
       onTapGestureCallback.invoke(
           MapGestureContext(
-              screenLocation, MapGestureType.TAP, LatLng(point.latitude, point.longitude))
+              screenLocation, MapGestureType.TAP, LatLng(point.latitude, point.longitude), features)
       )
       true
     }
@@ -61,15 +56,9 @@ internal fun MapboxMap.setupEventCallbacks(
       val screenLocation = projection.toScreenLocation(point)
       val features = queryRenderedFeatures(screenLocation)
 
-      if (features.isNotEmpty()) {
-        Log.d(
-            "MapLibre",
-            "MapView detected features at location. Consider using feature tap gesture instead if using have runtime features.")
-      }
-
       onLongPressGestureCallback.invoke(
           MapGestureContext(
-              screenLocation, MapGestureType.LONG_PRESS, LatLng(point.latitude, point.longitude))
+              screenLocation, MapGestureType.LONG_PRESS, LatLng(point.latitude, point.longitude), features)
       )
       true
     }
